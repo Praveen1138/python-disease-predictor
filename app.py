@@ -121,6 +121,7 @@ def home():
     user input model: <json> {"symptoms":list<string>}
     """
     if request.method == 'POST':
+        print(request.get_json())
         userinput = request.get_json()
         userinput = userinput["symptoms"]
         userinput = userinput.split(',')
