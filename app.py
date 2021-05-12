@@ -114,36 +114,33 @@ def home():
     # end 
     print(len(availablesymptoms))#debugging
 
-    packet = {'response':'error'}
+    packet = {'response':'error','input':''}
 
-    try:
-        # getting the user symptom input 
-        """
-        user input model: <json> {"symptoms":list<string>}
-        """
-        userinput = request.get_json()
-        userinput = userinput["symptoms"]
-        userinput = userinput.split(',')
-        userinput = [i.lower() for i in userinput]
-        # end
+    # getting the user symptom input 
+    """
+    user input model: <json> {"symptoms":list<string>}
+    """
+    userinput = request.get_json()
+    userinput = userinput["symptoms"]
+    userinput = userinput.split(',')
+    userinput = [i.lower() for i in userinput]
+    # end
 
-        # preprocessing the input symptoms 
-        userinputlist = list(map(int,list('0'*len(availablesymptoms))))
-        for i in range(len(availablesymptoms)):
-            current = ' '.join(availablesymptoms[i].split('_')).lower()
-            if current in userinput:
-                userinputlist[i]=1
-        print(userinputlist) # debug
-        # end
+    # preprocessing the input symptoms 
+    userinputlist = list(map(int,list('0'*len(availablesymptoms))))
+    for i in range(len(availablesymptoms)):
+        current = ' '.join(availablesymptoms[i].split('_')).lower()
+        if current in userinput:
+            userinputlist[i]=1
+    packet['input']=' '.join(userinput) # debug
+    # end
 
-        # loading model and predicting
-        model = pickle.load(open('disease_preditcor.pkl','rb'))
-        prediction = model.predict([userinputlist])
-        packet['response'] = prediction[0]
-        # end
-    except Exception:
-        pass
-
+    # loading model and predicting
+    model = pickle.load(open('disease_preditcor.pkl','rb'))
+    prediction = model.predict([userinputlist])
+    packet['response'] = prediction[0]
+    # end
+    
     return jsonify(packet)
 
 if __name__ == '__main__':
