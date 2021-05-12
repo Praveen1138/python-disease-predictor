@@ -124,6 +124,7 @@ def home():
     userinput = userinput["symptoms"]
     userinput = userinput.split(',')
     userinput = [i.lower() for i in userinput]
+    packet['input']=userinput
     # end
 
     # preprocessing the input symptoms 
