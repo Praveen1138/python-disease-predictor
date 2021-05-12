@@ -122,8 +122,7 @@ def home():
     """
     if request.method == 'POST':
         print(dict(request.form))
-        userinput = request.get_json()
-        userinput = userinput["symptoms"]
+        userinput = dict(request.form)['symptoms']
         userinput = userinput.split(',')
         userinput = [i.lower() for i in userinput]
         packet['input']=userinput
