@@ -127,7 +127,7 @@ def home():
     # end
 
     # preprocessing the input symptoms 
-    userinputlist = list(map(int,list('0'*len(availablesymptoms))))
+   ''' userinputlist = list(map(int,list('0'*len(availablesymptoms))))
     for i in range(len(availablesymptoms)):
         current = ' '.join(availablesymptoms[i].split('_')).lower()
         if current in userinput:
@@ -139,7 +139,7 @@ def home():
     model = pickle.load(open('disease_preditcor.pkl','rb'))
     prediction = model.predict([userinputlist])
     packet['response'] = prediction[0]
-    # end
+    # end'''
     
     return jsonify(packet)
 
