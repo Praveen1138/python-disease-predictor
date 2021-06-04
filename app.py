@@ -134,7 +134,7 @@ def home():
             current = [k.lower() for k in availablesymptoms[i].split('_')]
             if current == userinput:
                 userinputlist[i]=1
-        packet['input']=' '.join(userinput) # debug
+        packet['input']=' '.join([' '.join(i) for i in userinput]) # debug
         # end
 
         # loading model and predicting
