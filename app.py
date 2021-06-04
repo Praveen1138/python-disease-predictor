@@ -124,7 +124,7 @@ def home():
         print(dict(request.form))
         userinput = dict(request.form)['symptoms']
         userinput = userinput.split(',')
-        userinput = [i.lower() for i in userinput]
+        userinput = [i.lower().split(' ') for i in userinput]
         packet['input']=userinput
         # end
 
