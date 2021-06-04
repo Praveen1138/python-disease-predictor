@@ -124,15 +124,15 @@ def home():
         print(dict(request.form))
         userinput = dict(request.form)['symptoms']
         userinput = userinput.split(',')
-        userinput = [i.lower().split(' ') for i in userinput]
+        userinput = [i.lower().split(' ').strip() for i in userinput]
         packet['input']=userinput
         # end
 
         # preprocessing the input symptoms 
         userinputlist = list(map(int,list('0'*len(availablesymptoms))))
         for i in range(len(availablesymptoms)):
-            current = [k.lower() for k in availablesymptoms[i].split('_')]
-            if current == userinput:
+            current = [k.lower() for k in availablesymptoms[i].split('_').strip()]
+            if current in userinput:
                 userinputlist[i]=1
         packet['input']=' '.join([' '.join(i) for i in userinput]) # debug
         # end
