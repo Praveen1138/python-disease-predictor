@@ -131,7 +131,7 @@ def home():
         # preprocessing the input symptoms 
         userinputlist = list(map(int,list('0'*len(availablesymptoms))))
         for i in range(len(availablesymptoms)):
-            current = [k.lower() for k in availablesymptoms[i].split('_').strip()]
+            current = [k.lower() for k in availablesymptoms[i].split('_')]
             if current in userinput:
                 userinputlist[i]=1
         packet['input']=' '.join([' '.join(i) for i in userinput]) # debug
